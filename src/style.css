@@ -90,7 +90,7 @@ img {
   margin: 30px 50px 0 50px;
   padding-top: 15px;
   border-radius: 15px;
-  background-color: #cccbdb;
+  background-color: #e0e0e0;
 }
 
 .currentcity {
@@ -110,7 +110,7 @@ h5 i {
 .weekweather {
   padding-top: 10px;
   border-radius: 15px;
-  background-color: #cccbdb;
+  background-color: #e0e0e0;
 }
 
 footer {
