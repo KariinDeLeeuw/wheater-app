@@ -32,12 +32,6 @@ p {
   font-size: 12px;
 }
 
-/* p i {
-  color: #ffb900;
-  font-size: 60px;
-  margin-top: 10px;
-} */
-
 h3 {
   font-style: italic;
   margin-top: -15px;
@@ -50,6 +44,21 @@ h1 {
 img {
   height: 110px;
   width: 130px;
+}
+
+.currentweather .col {
+  margin-bottom: -15px;
+}
+
+#description {
+  text-transform: capitalize;
+}
+
+#icon {
+  height: 100px;
+  width: 100px;
+  margin-top: -10px;
+  margin-left: -10px;
 }
 
 #conditions p {
@@ -81,7 +90,7 @@ img {
   margin: 30px 50px 0 50px;
   padding-top: 15px;
   border-radius: 15px;
-  background-color: #f0f0f5;
+  background-color: #cccbdb;
 }
 
 .currentcity {
@@ -101,13 +110,13 @@ h5 i {
 .weekweather {
   padding-top: 10px;
   border-radius: 15px;
-  background-color: #f0f0f5;
+  background-color: #cccbdb;
 }
 
 footer {
   margin-left: 300px;
 }
 
-#description {
-  text-transform: capitalize;
+footer p {
+  font-size: 15px;
 }
