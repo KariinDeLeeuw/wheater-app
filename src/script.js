@@ -33,16 +33,26 @@ let apiKey = "b8b67f25aca36174d7cefe6d6e1ff8be";
 //The function showTempCity receives a response from the API call.
 function showTempCity(response) {
   //Store the cityname and temp in two seperate variables.
-  currentCity = response.data.name;
-  currentTemp = response.data.main.temp;
+  let currentCity = response.data.name;
+  let currentTemp = response.data.main.temp;
+  let icon = response.data.weather[0].icon;
+  let description = response.data.weather[0].description;
+  let humidity = response.data.main.humidity;
+  let wind = response.data.wind.speed;
+  console.log(response);
   //Call the function showCurrentData with the stored variables.
-  showCurrentData(currentCity, currentTemp);
+  showCurrentData(currentCity, currentTemp, icon, description, humidity, wind);
 }
 
 //Function showCurrentData receives two parameters you got from the API calls and have stored in variables. And prints them on the HTML page.
-function showCurrentData(city, temp) {
+function showCurrentData(city, temp, icon, description, humidity, wind) {
+  let image = document.getElementById("icon");
+  document.getElementById("description").innerHTML = description;
   document.getElementById("currentCity").innerHTML = `<h1>${city}</h1>`;
   document.getElementById("currentTemp").innerHTML = Math.round(temp) + "°C";
+  document.getElementById("humid").innerHTML = `${humidity}%`;
+  document.getElementById("wind").innerHTML = `${Math.round(wind)} km/h`;
+  image.setAttribute("src", `http://openweathermap.org/img/wn/${icon}@2x.png`);
 }
 
 /**
@@ -70,8 +80,19 @@ function showSearchRes(response) {
   //Store the city name and temperature you receive from the API call in two seperate variables.
   let searchResCity = response.data.name;
   let searchResTemp = Math.round(response.data.main.temp);
+  let searchIcon = response.data.weather[0].icon;
+  let description = response.data.weather[0].description;
+  let humidity = response.data.main.humidity;
+  let wind = response.data.wind.speed;
   //Call the function showCurrentData and pass the two variables as parameter.
-  showCurrentData(searchResCity, searchResTemp);
+  showCurrentData(
+    searchResCity,
+    searchResTemp,
+    searchIcon,
+    description,
+    humidity,
+    wind
+  );
 }
 
 /**

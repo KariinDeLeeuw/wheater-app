@@ -32,11 +32,11 @@ p {
   font-size: 12px;
 }
 
-p i {
+/* p i {
   color: #ffb900;
   font-size: 60px;
   margin-top: 10px;
-}
+} */
 
 h3 {
   font-style: italic;
@@ -106,4 +106,8 @@ h5 i {
 
 footer {
   margin-left: 300px;
+}
+
+#description {
+  text-transform: capitalize;
 }
