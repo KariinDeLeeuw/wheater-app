@@ -32,19 +32,18 @@ let apiKey = "b8b67f25aca36174d7cefe6d6e1ff8be";
 
 //The function showTempCity receives a response from the API call.
 function showTempCity(response) {
-  //Store the cityname and temp in two seperate variables.
+  //Store the cityname, temp, icon and weather description in seperate variables.
   let currentCity = response.data.name;
   let currentTemp = response.data.main.temp;
   let icon = response.data.weather[0].icon;
   let description = response.data.weather[0].description;
   let humidity = response.data.main.humidity;
   let wind = response.data.wind.speed;
-  console.log(response);
   //Call the function showCurrentData with the stored variables.
   showCurrentData(currentCity, currentTemp, icon, description, humidity, wind);
 }
 
-//Function showCurrentData receives two parameters you got from the API calls and have stored in variables. And prints them on the HTML page.
+//Function showCurrentData receives parameters you got from the API calls and have stored in variables. And prints them on the HTML page.
 function showCurrentData(city, temp, icon, description, humidity, wind) {
   let image = document.getElementById("icon");
   document.getElementById("description").innerHTML = description;
@@ -77,14 +76,14 @@ function searchCity(event) {
 
 //Here you get the result of the API call so you can work with it.
 function showSearchRes(response) {
-  //Store the city name and temperature you receive from the API call in two seperate variables.
+  //Store the city name, temperature, icon and weather description you receive from the API call in seperate variables.
   let searchResCity = response.data.name;
   let searchResTemp = Math.round(response.data.main.temp);
   let searchIcon = response.data.weather[0].icon;
   let description = response.data.weather[0].description;
   let humidity = response.data.main.humidity;
   let wind = response.data.wind.speed;
-  //Call the function showCurrentData and pass the two variables as parameter.
+  //Call the function showCurrentData and pass the variables as parameter.
   showCurrentData(
     searchResCity,
     searchResTemp,
