@@ -70,8 +70,10 @@ function searchCity(event) {
 
   //Create an URL with the requested city and API key.
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${apiKey}&units=metric`;
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=metric&appid=${apiKey}`;
   //Initialize an API call with the created URL and give the result to the callback function showSearchRes
   axios.get(apiUrl).then(showSearchRes);
+  axios.get(apiUrlForecast).then(showForecast);
 }
 
 //Here you get the result of the API call so you can work with it.
@@ -114,8 +116,53 @@ function showPosition(position) {
   let longitude = position.coords.longitude;
   //Create an URL for the API call with the current lat,long and API key
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+  //API url for forecast
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
   //Initialize an API call with the created URL and give the data you received to the function showTempCity
   axios.get(apiUrl).then(showTempCity);
+  //Create another api call which gives you the forecast result
+  axios.get(apiUrlForecast).then(showForecast);
+}
+
+function showForecast(response) {
+  console.log(response);
+  console.log(now.getHours());
+  let forecastResult = response.data.list;
+  let today = now.getDay();
+  let forecastOutput = "";
+  for (var i = 0; i < forecastResult.length; i++) {
+    if (forecastResult[i].dt_txt.includes("15:00:00")) {
+      if (now.getHours() > 15 && today < 6) {
+        today++;
+      } else if (now.getHours() > 15 && today > 6) {
+        today = 0;
+      }
+      let forecastDay = currentDay[today];
+      let forecastIcon = forecastResult[i].weather[0].icon;
+      let forecastTemp = Math.round(forecastResult[i].main.temp);
+
+      //Increment the result as a string with HTML elements to the forecastOutput variable.
+      forecastOutput += `
+      <div class="row align-items-start">
+      <div class="col">
+        <h5>${forecastDay}</h5>
+       </div>
+       <div class="col">
+        <img src="http://openweathermap.org/img/wn/${forecastIcon}@2x.png">
+       </div>
+       <div class="col">
+        <h5>${forecastTemp}°</h5>
+       </div>
+       </div>`;
+
+      if (today == 6) {
+        today = 0;
+      } else {
+        today++;
+      }
+    }
+  }
+  document.getElementById("weekweather").innerHTML = forecastOutput;
 }
 
 // let isCelsius = true;

@@ -55,7 +55,7 @@ img {
   text-transform: capitalize;
 }
 
-#icon {
+.currentweather #icon {
   height: 100px;
   width: 100px;
   margin-top: -10px;
@@ -103,15 +103,16 @@ h2 {
   font-weight: bold;
 }
 
-h5 i {
-  color: #ffb900;
-  font-size: 30px;
-}
-
 .weekweather {
   padding-top: 10px;
   border-radius: 15px;
   background-color: #e0e0e0;
+}
+
+.weekweather img {
+  height: 50px;
+  width: 50px;
+  margin-top: -10px;
 }
 
 footer {
