@@ -47,6 +47,12 @@ img {
   width: 130px;
 }
 
+.currentweather .units {
+  position: relative;
+  font-size: 15px;
+  top: -10px;
+}
+
 .currentweather .col {
   margin-bottom: -15px;
 }
@@ -101,6 +107,15 @@ img {
 h2 {
   font-size: 30px;
   font-weight: bold;
+}
+
+h2 .active {
+  color: #000;
+  cursor: default;
+}
+
+h2 .active:hover {
+  text-decoration: none;
 }
 
 .weekweather {

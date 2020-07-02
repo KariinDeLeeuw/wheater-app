@@ -34,11 +34,12 @@ let apiKey = "b8b67f25aca36174d7cefe6d6e1ff8be";
 function showTempCity(response) {
   //Store the cityname, temp, icon and weather description in seperate variables.
   let currentCity = response.data.name;
-  let currentTemp = response.data.main.temp;
+  currentTemp = response.data.main.temp;
   let icon = response.data.weather[0].icon;
   let description = response.data.weather[0].description;
   let humidity = response.data.main.humidity;
   let wind = response.data.wind.speed;
+
   //Call the function showCurrentData with the stored variables.
   showCurrentData(currentCity, currentTemp, icon, description, humidity, wind);
 }
@@ -48,7 +49,7 @@ function showCurrentData(city, temp, icon, description, humidity, wind) {
   let image = document.getElementById("icon");
   document.getElementById("description").innerHTML = description;
   document.getElementById("currentCity").innerHTML = `<h1>${city}</h1>`;
-  document.getElementById("currentTemp").innerHTML = Math.round(temp) + "°C";
+  document.getElementById("currentTemp").innerHTML = Math.round(temp);
   document.getElementById("humid").innerHTML = `${humidity}%`;
   document.getElementById("wind").innerHTML = `${Math.round(wind)} km/h`;
   image.setAttribute("src", `http://openweathermap.org/img/wn/${icon}@2x.png`);
@@ -80,7 +81,7 @@ function searchCity(event) {
 function showSearchRes(response) {
   //Store the city name, temperature, icon and weather description you receive from the API call in seperate variables.
   let searchResCity = response.data.name;
-  let searchResTemp = Math.round(response.data.main.temp);
+  currentTemp = Math.round(response.data.main.temp);
   let searchIcon = response.data.weather[0].icon;
   let description = response.data.weather[0].description;
   let humidity = response.data.main.humidity;
@@ -88,7 +89,7 @@ function showSearchRes(response) {
   //Call the function showCurrentData and pass the variables as parameter.
   showCurrentData(
     searchResCity,
-    searchResTemp,
+    currentTemp,
     searchIcon,
     description,
     humidity,
@@ -165,22 +166,31 @@ function showForecast(response) {
   document.getElementById("weekweather").innerHTML = forecastOutput;
 }
 
-// let isCelsius = true;
-// let farenheitLink = document.getElementById("fahrenheit-link");
-// farenheitLink.addEventListener("click", changeToFarenheit);
+let currentTemp = null;
 
-// function changeToFarenheit(event) {
-//   event.preventDefault();
-//   if (isCelsius == true) {
-//     document.getElementById("currentTemp").innerHTML = 77;
-//     isCelsius = false;
-//   }
-// }
+let fahrenheitLink = document.querySelector("#fahrenheitLink");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
-// function changeToCelsius(event) {
-//   event.preventDefault();
-//   if (isCelsius == false) {
-//     document.getElementById("currentTemp").innerHTML = 25;
-//     isCelsius = true;
-//   }
-// }
+let celciusLink = document.querySelector("#celciusLink");
+celciusLink.addEventListener("click", showCelciusTemp);
+
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#currentTemp");
+  // Remove the active class from the celcius link
+  celciusLink.classList.remove("active");
+  // Add active class to fahrenheit link
+  fahrenheitLink.classList.add("active");
+  let fahrenheitTemperature = (currentTemp * 9) / 5 + 32;
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
+
+function showCelciusTemp(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#currentTemp");
+  // Add the active class from the celcius link
+  celciusLink.classList.add("active");
+  // Remove active class to fahrenheit link
+  fahrenheitLink.classList.remove("active");
+  temperatureElement.innerHTML = Math.round(currentTemp);
+}
