@@ -174,6 +174,7 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 let celciusLink = document.querySelector("#celciusLink");
 celciusLink.addEventListener("click", showCelciusTemp);
 
+// This function converts celcius to fahrenheit
 function showFahrenheitTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#currentTemp");
@@ -185,6 +186,7 @@ function showFahrenheitTemp(event) {
   temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
 }
 
+// This function goes back to celcius
 function showCelciusTemp(event) {
   event.preventDefault();
   let temperatureElement = document.querySelector("#currentTemp");

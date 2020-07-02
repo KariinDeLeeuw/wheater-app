@@ -4,13 +4,21 @@
   box-sizing: border-box;
 }
 
+.wrapper {
+  width: 100%;
+}
+
 body {
   height: 100%;
   font-family: "Montserrat", sans-serif;
-  background-image: linear-gradient(to top right, #00dbdf, #dc06e4);
   display: block;
   margin: 20px auto;
   align-items: center;
+  background-image: linear-gradient(to top right, #00dbdf, #dc06e4);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 form {
@@ -86,7 +94,7 @@ img {
 }
 
 #location:hover {
-  background-color: #f8b900;
+  background-color: #ec6e4c;
 }
 
 #location:focus {

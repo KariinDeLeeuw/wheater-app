@@ -22,131 +22,77 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <form id="searchButton">
-            <div class="input-group">
-              <input
-                type="text"
-                class="form-control"
-                id="inputCity"
-                placeholder="Search"
-              />
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
+    <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <form id="searchButton">
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputCity"
+                  placeholder="Search"
+                />
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
               </div>
+            </form>
+          </div>
+        </div>
+        <div class="currentweather">
+          <div class="row">
+            <div class="col">
+              <p>Last updated:</p>
+              <h3 id="currentDay">Sunday</h3>
+              <h3 id="currentTime">15:12</h3>
             </div>
-          </form>
+            <div class="col">
+              <h2>
+                <span id="currentTemp"></span>
+                <span class="units">
+                  <a href="" id="celciusLink" class="active">°C</a> |
+                  <a href="" id="fahrenheitLink">°F</a>
+                </span>
+              </h2>
+              <h2><i class="fas fa-temperature-high"></i></h2>
+            </div>
+            <div class="col" id="conditions">
+              <p id="description"></p>
+              <p>Humidity: <span id="humid"></span></p>
+              <p>Wind: <span id="wind"></span></p>
+            </div>
+            <div class="col">
+              <p><img id="icon" src="" alt="" /></p>
+            </div>
+          </div>
         </div>
+        <div class="currentcity">
+          <div class="row">
+            <div class="col-3">
+              <button id="location">Your location</button>
+            </div>
+            <div class="col-5" id="currentCity"></div>
+            <div class="col-4">
+              <img src="images/city.png" alt="Urban city" />
+            </div>
+          </div>
+        </div>
+        <div class="weekweather" id="weekweather"></div>
       </div>
-      <div class="currentweather">
-        <div class="row">
-          <div class="col">
-            <p>Last updated:</p>
-            <h3 id="currentDay">Sunday</h3>
-            <h3 id="currentTime">15:12</h3>
-          </div>
-          <div class="col">
-            <h2>
-              <span id="currentTemp"></span>
-              <span class="units">
-                <a href="" id="celciusLink" class="active">°C</a> |
-                <a href="" id="fahrenheitLink">°F</a>
-              </span>
-            </h2>
-            <h2><i class="fas fa-temperature-high"></i></h2>
-          </div>
-          <div class="col" id="conditions">
-            <p id="description"></p>
-            <p>Humidity: <span id="humid"></span></p>
-            <p>Wind: <span id="wind"></span></p>
-          </div>
-          <div class="col">
-            <p><img id="icon" src="" alt="" /></p>
-          </div>
-        </div>
-      </div>
-      <div class="currentcity">
-        <div class="row">
-          <div class="col-3">
-            <button id="location">Your location</button>
-          </div>
-          <div class="col-5" id="currentCity"></div>
-          <div class="col-4">
-            <img src="images/city.png" alt="Urban city" />
-          </div>
-        </div>
-      </div>
-      <div class="weekweather" id="weekweather">
-        <!-- <div class="row align-items-start">
-          <div class="col">
-            <h5>Monday</h5>
-          </div>
-          <div class="col">
-            <h5><i class="fas fa-sun"></i></h5>
-          </div>
-          <div class="col">
-            <h5>24°</h5>
-          </div>
-        </div>
-        <div class="row align-items-start">
-          <div class="col">
-            <h5>Tuesday</h5>
-          </div>
-          <div class="col">
-            <h5><i class="fas fa-cloud-sun"></i></h5>
-          </div>
-          <div class="col">
-            <h5>19°</h5>
-          </div>
-        </div>
-        <div class="row align-items-start">
-          <div class="col">
-            <h5>Wednesday</h5>
-          </div>
-          <div class="col">
-            <h5><i class="fas fa-cloud-sun-rain"></i></h5>
-          </div>
-          <div class="col">
-            <h5>19°</h5>
-          </div>
-        </div>
-        <div class="row align-items-start">
-          <div class="col">
-            <h5>Thursday</h5>
-          </div>
-          <div class="col">
-            <h5><i class="fas fa-cloud-showers-heavy"></i></h5>
-          </div>
-          <div class="col">
-            <h5>17°</h5>
-          </div>
-        </div>
-        <div class="row align-items-start">
-          <div class="col">
-            <h5>Friday</h5>
-          </div>
-          <div class="col">
-            <h5><i class="fas fa-sun"></i></h5>
-          </div>
-          <div class="col">
-            <h5>17°</h5>
-          </div>
-        </div> -->
-      </div>
+      <br />
+      <footer>
+        <p>
+          <a href="https://github.com/KariinDeLeeuw/wheater-app" target="_blank"
+            >Open-source code
+          </a>
+          by Karin de Leeuw
+        </p>
+      </footer>
     </div>
-    <br />
-    <footer>
-      <p>
-        <a href="https://github.com/KariinDeLeeuw/wheater-app" target="_blank"
-          >Open-source code
-        </a>
-        by Karin de Leeuw
-      </p>
-    </footer>
     <script src="/src/script.js"></script>
   </body>
 </html>
