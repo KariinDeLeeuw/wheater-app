@@ -131,13 +131,13 @@ function showForecast(response) {
   let forecastResult = response.data.list;
   let today = now.getDay();
   let forecastOutput = "";
+
+  if (now.getHours() >= 15) {
+    today++;
+  }
+
   for (var i = 0; i < forecastResult.length; i++) {
     if (forecastResult[i].dt_txt.includes("15:00:00")) {
-      if (now.getHours() > 15 && today < 6) {
-        today++;
-      } else if (now.getHours() > 15 && today > 6) {
-        today = 0;
-      }
       let forecastDay = currentDay[today];
       let forecastIcon = forecastResult[i].weather[0].icon;
       let forecastTemp = Math.round(forecastResult[i].main.temp);
@@ -160,6 +160,7 @@ function showForecast(response) {
         today = 0;
       } else {
         today++;
+        console.log(today);
       }
     }
   }
