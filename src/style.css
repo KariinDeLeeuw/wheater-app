@@ -139,9 +139,15 @@ h2 .active:hover {
 }
 
 footer {
-  margin-left: 300px;
+  margin-left: 60px;
 }
 
 footer p {
   font-size: 15px;
+}
+
+@media only screen and (min-width: 800px) {
+  footer {
+    margin-left: 300px;
+  }
 }
