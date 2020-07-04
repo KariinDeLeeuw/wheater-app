@@ -1,5 +1,10 @@
 let now = new Date();
 let currentDay = document.getElementById("currentDay");
+let unit = "metric";
+let speedUnit = "km/h";
+//searchCityInput variable stores the city in a variable so it can be used again.
+var searchCityInput = "";
+let localCity = true;
 
 currentDay = [
   "Sunday",
@@ -51,7 +56,9 @@ function showCurrentData(city, temp, icon, description, humidity, wind) {
   document.getElementById("currentCity").innerHTML = `<h1>${city}</h1>`;
   document.getElementById("currentTemp").innerHTML = Math.round(temp);
   document.getElementById("humid").innerHTML = `${humidity}%`;
-  document.getElementById("wind").innerHTML = `${Math.round(wind)} km/h`;
+  document.getElementById("wind").innerHTML = `${Math.round(
+    wind
+  )} ${speedUnit}`;
   image.setAttribute("src", `http://openweathermap.org/img/wn/${icon}@2x.png`);
 }
 
@@ -68,10 +75,14 @@ function searchCity(event) {
   //Store the value of the inputfield in a variable and clear the inputfield.
   let input = document.getElementById("inputCity").value;
   document.getElementById("inputCity").value = "";
+  //Store the value of the city in this global variable so it can be used again. Every time a new city is searched the value of this variable changes.
+  searchCityInput = input;
+  //This boolean is set to false whenever a city is searched. This acts as a check which is used other functions.
+  localCity = false;
 
   //Create an URL with the requested city and API key.
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${apiKey}&units=metric`;
-  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${apiKey}&units=${unit}`;
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${input}&units=${unit}&appid=${apiKey}`;
   //Initialize an API call with the created URL and give the result to the callback function showSearchRes
   axios.get(apiUrl).then(showSearchRes);
   axios.get(apiUrlForecast).then(showForecast);
@@ -115,10 +126,11 @@ function showPosition(position) {
   //Store the lat,long of the current position in two seperate variables.
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
+  localCity = true;
   //Create an URL for the API call with the current lat,long and API key
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
   //API url for forecast
-  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
   //Initialize an API call with the created URL and give the data you received to the function showTempCity
   axios.get(apiUrl).then(showTempCity);
   //Create another api call which gives you the forecast result
@@ -178,22 +190,45 @@ celciusLink.addEventListener("click", showCelciusTemp);
 // This function converts celcius to fahrenheit
 function showFahrenheitTemp(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#currentTemp");
+  // let temperatureElement = document.querySelector("#currentTemp");
   // Remove the active class from the celcius link
   celciusLink.classList.remove("active");
   // Add active class to fahrenheit link
   fahrenheitLink.classList.add("active");
-  let fahrenheitTemperature = (currentTemp * 9) / 5 + 32;
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+
+  unit = "imperial";
+  speedUnit = "mph";
+  if (localCity) {
+    showCurrentCity();
+  } else {
+    refreshUnit();
+  }
 }
 
 // This function goes back to celcius
 function showCelciusTemp(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector("#currentTemp");
+  // let temperatureElement = document.querySelector("#currentTemp");
   // Add the active class from the celcius link
   celciusLink.classList.add("active");
   // Remove active class to fahrenheit link
   fahrenheitLink.classList.remove("active");
-  temperatureElement.innerHTML = Math.round(currentTemp);
+  // temperatureElement.innerHTML = Math.round(currentTemp);
+
+  unit = "metric";
+  speedUnit = "km/h";
+  if (localCity) {
+    showCurrentCity();
+  } else {
+    refreshUnit();
+  }
+}
+
+function refreshUnit() {
+  //Create an URL with the requested city and API key.
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${searchCityInput}&appid=${apiKey}&units=${unit}`;
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${searchCityInput}&units=${unit}&appid=${apiKey}`;
+  //Initialize an API call with the created URL and give the result to the callback function showSearchRes
+  axios.get(apiUrl).then(showSearchRes);
+  axios.get(apiUrlForecast).then(showForecast);
 }
