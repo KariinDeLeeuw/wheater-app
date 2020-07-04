@@ -143,9 +143,11 @@ function showForecast(response) {
   let forecastResult = response.data.list;
   let today = now.getDay();
   let forecastOutput = "";
-
-  if (now.getHours() >= 15) {
+  console.log("Today is" + today);
+  if (now.getHours() >= 15 && today < 6) {
     today++;
+  } else if (now.getHours() >= 15 && today > 6) {
+    today = 0;
   }
 
   for (var i = 0; i < forecastResult.length; i++) {
@@ -168,7 +170,7 @@ function showForecast(response) {
        </div>
        </div>`;
 
-      if (today == 6) {
+      if (today >= 6) {
         today = 0;
       } else {
         today++;
